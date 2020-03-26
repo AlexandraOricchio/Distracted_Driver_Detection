@@ -97,7 +97,7 @@ model.add(MaxPooling2D(pool_size=(4,4),
                       strides = 4))
 model.add(Dropout(0.2))
 
-model.add(Conv2D(filters=32,
+model.add(Conv2D(filters=128,
                 kernel_size=(4,4),
                 strides=(1,1),
                 padding="same"))
