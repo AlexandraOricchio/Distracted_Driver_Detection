@@ -1,5 +1,5 @@
 # Distracted Driver Detection
-### _Our Team: Youssef Mroue, David Nassif, Vaishall Pradeepkumar, Alexandra Oricchio_
+### _Our Team: Youssef Mroue, David Nassif, Alexandra Oricchio, Vaishall Pradeepkumar_
 
 ## Repository Structure:
 - **Data Folder**
