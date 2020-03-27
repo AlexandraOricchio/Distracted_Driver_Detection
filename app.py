@@ -14,7 +14,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 #### loading a keras model with flask ####
 def load_model():
     global model
-    model = keras.models.load_model("model_here.h5")
+    model = keras.models.load_model("48_model.h5")
 
 #### preprocess data function ####
 def prepare_image(img):
@@ -33,8 +33,19 @@ def prepare_image(img):
 def index():
     return render_template("index.html")
 
+@app.route("/data")
+def data():
+    return render_template("data.html")
 
-@app.route("/predict", methods=["POST"])
+@app.route("/video")
+def video():
+    return render_template("video.html")
+
+@app.route("/model")
+def model():
+    return render_template("model.html")
+
+@app.route("/photo", methods=["GET","POST"])
 def predict():
     data = {"Success": False}
 
@@ -55,7 +66,7 @@ def predict():
             # get tensorflow default session & graph & make predictions
             with session.as_default():
                 with session.graph.as_default():
-                    predicted_distraction = model.predict_classes(image_array)[0]
+                    predicted_distraction = model.predict_classes(image_array)
                     data["Prediction"]=str(predicted_distraction)
                     data["Success"]=True
 
