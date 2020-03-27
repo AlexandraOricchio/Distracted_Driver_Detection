@@ -8,7 +8,7 @@
   - **rawData Folder:** Raw data from [StateFarm](https://www.kaggle.com/c/state-farm-distracted-driver-detection/data)
   - **_model_preprocessing.ipynb:_** Jupyter notebook with model preprocessing 
   - **_model_preprocessing.py:_** Python script for model preprocessing 
-  - **_evaluating.py:_** Python script evaluating 48_model's generators
+  - **_evaluating.py:_** Python script evaluating _48_model's_ generators
   - **_test.py:_**
   - **_48_model.h5:_** Model version 1
   - **_DDD_model.h5:_** Model version 2
