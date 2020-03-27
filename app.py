@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, render_template
 import keras
 from keras.preprocessing import image
 from keras import backend as K
+from tensorflow.keras.models import load_model
 
 
 #### flask setup ####
@@ -12,21 +13,21 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
 #### loading a keras model with flask ####
-def load_model():
+def loaded_model():
     global model
-    model = keras.models.load_model("48_model.h5")
+    model = load_model("Data/48_model.h5")
+    model.summary()
 
 #### preprocess data function ####
 def prepare_image(img):
-    img = image.resize(480,640)
     #convert image tp numpy array
     img = image.img_to_array(img)
     #scale the image pixels and invert the pixels
     img /= 255 
     img = 1 - img
-    #flatten img to an array of pixels
-    img_array = img.flatten().reshape(-1, 480*640)
-    return img_array 
+    img = img.reshape(1,480,640,3)
+    print(img.shape)
+    return img
 
 #### flask routes ####
 @app.route("/")
@@ -63,15 +64,13 @@ def predict():
             # convert image to an array of values
             image_array = prepare_image(im)
 
-            # get tensorflow default session & graph & make predictions
-            with session.as_default():
-                with session.graph.as_default():
-                    predicted_distraction = model.predict_classes(image_array)
-                    data["Prediction"]=str(predicted_distraction)
-                    data["Success"]=True
+            predicted_distraction = model.predict_classes(image_array)
+            data["Prediction"]=str(predicted_distraction)
+            data["Success"]=True
 
             return jsonify(data)
     return render_template("photo.html")
 
 if __name__ == '__main__':
+    loaded_model()
     app.run(debug=True)
