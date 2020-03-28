@@ -117,7 +117,7 @@ model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics=['a
 start = dt.now()
 model.fit_generator(train_generator,
                    steps_per_epoch = 18008//32,
-                   epochs=15,
+                   epochs=100,
                    validation_data = valid_generator,
                    validation_steps = 4416//32)
 print(dt.now()-start)
