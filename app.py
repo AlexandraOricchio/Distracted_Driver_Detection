@@ -16,7 +16,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 def loaded_model():
     global model
     model = load_model("Data/final_model.h5")
-    model.summary()
+ 
 
 #### preprocess data function ####
 def prepare_image(img):
