@@ -7,6 +7,21 @@ from keras.preprocessing import image
 from keras import backend as K
 from tensorflow.keras.models import load_model
 
+#### Converting Number Codes to Distraction Type ####
+def distractiontype(i):
+    switcher={
+        0:'safe driving',
+        1:'texting right',
+        2:'talking on the phone right',
+        3:'texting left',
+        4:'talking on the phone left',
+        5:'operating the radio',
+        6:'drinking',
+        7:'reaching behind',
+        8:'hair and makeup',
+        9:'talking to passenger'
+    }
+    return switcher.get(i,"Invalid day of week")
 
 #### flask setup ####
 app = Flask(__name__)
@@ -69,8 +84,8 @@ def predict():
             data["Prediction"]=str(predicted_distraction)
             data["Success"]=True
 
-            return jsonify(data)
-    return render_template("photo.html")
+            # return jsonify(data)
+    return render_template("photo.html",data=data)
 
 @app.route("/output")
 def output():
