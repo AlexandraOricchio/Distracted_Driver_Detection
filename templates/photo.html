@@ -6,12 +6,69 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Distracted Driver Detection</title>
-    <!-- Boostrap Stylesheet -->
+    <!-- Boostrap Stylesheet -->s
     <link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen">
     <!-- Our own CSS stylesheet -->
     <link rel="stylesheet" href="../static/css/styles.css" media="screen">
   </head>
+  
+  
+  <script type="text/javascript">
+    
+    // var photopath = {{ photopath }};
+    // var img = document.createElement("img");
+    // img.src = photopath;
+    // var src = document.getElementById("driverImage");
+    // src.appendChild(img);
 
+    var predictionNumber = parseInt({{ data["Prediction"] }});
+    if (predictionNumber > 0) {safe = "This Driver is Distracted!"}
+    else {safe = " "};
+  
+
+    switch(predictionNumber) {
+      case 0:
+        prediction = "This Driver is being Safe!";
+        break;
+      case 1: 
+        prediction = "The Driver is texting with their Right Hand";
+        break;
+      case 2: 
+        prediction = "The Driver is talking on the phone with their Right Hand";
+        break;
+      case 3: 
+        prediction = "The Driver is texting with their Left Hand";
+        break;
+      case 4: 
+        prediction = "The Driver is talking on the phone with their Left Hand";
+        break;
+      case 5: 
+        prediction = "The Driver is Operating the Radio";
+        break;
+      case 6: 
+        prediction = "The Driver is Drinking";
+        break;
+      case 7: 
+        prediction = "The Driver is Reaching Behind";
+        break;
+      case 8: 
+        prediction = "The Driver is Focused on their Hair and Makeup";
+        break;
+      case 9: 
+        prediction = "The Driver is Talking to a Passenger";
+        break;
+        
+      
+      default: 
+        prediction = " "; }
+    
+    
+    window.onload = function() {
+       //when the document is finished loading, replace everything
+       //between the <a ...> </a> tags with the value of splitText
+    document.getElementById("safe").innerHTML=safe;   
+    document.getElementById("prediction").innerHTML=prediction;}
+  </script>
 
   <body>
     <!-- Start of navbar -->
@@ -56,6 +113,10 @@
               <form method="post" enctype="multipart/form-data">
                 <input type="file" name="file">
                 <input type="submit" value="Upload">
+                <p></p>
+                <div id='driverImage'></div>
+                <p id='safe'> </p>
+                <p id='prediction'> </p>
               </form>
           </article>
         </div>
