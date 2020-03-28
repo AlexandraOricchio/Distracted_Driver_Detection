@@ -54,6 +54,8 @@ def predict():
             # save file to uploads folder
             file = request.files["file"]
             filename = file.filename
+            #### make sure image is in correct format and give unique file name
+            # if filename.endswith('.jpg'):
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
 

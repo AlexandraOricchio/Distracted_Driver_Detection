@@ -120,7 +120,7 @@ body {
 
 .description-content > p {
   /* Box-model */
-  padding-top: 20px;
+  /* padding-top: 10px; */
   /* Typography */
   font-size: 16px;
   line-height: 30px;
@@ -131,14 +131,11 @@ body {
   padding-bottom: 20px;
 }
 
-#description-image {
-  /* Positioning */
-  float: left;
-  /* Box-model */
-  width: 200px;
-  height: 200px;
-  margin-top: 20px;
-  margin-right: 20px;
+#ddd-image {
+  /* opacity: 0.5; */
+  max-width: 100%;
+  height: auto;
+  /* margin-top: 20px; */
 }
 
 /* Description content media query */
@@ -148,7 +145,6 @@ body {
   .description-content {
     /* Box-model */
     padding: 0;
-
     /* Positioning */
     margin-top: 0;
   }
