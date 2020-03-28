@@ -22,11 +22,11 @@ def loaded_model():
 def prepare_image(img):
     #convert image tp numpy array
     img = image.img_to_array(img)
-    #scale the image pixels and invert the pixels
-    img /= 255 
-    img = img.reshape(1,480,640,3)
-    print(img.shape)
-    return img
+    #scale the image 
+    img_data = np.expand_dims(img, 0)
+    datagen = image.ImageDataGenerator(rescale=1./255)
+    final_data = datagen.flow(img_data)[0]
+    return final_data
 
 #### flask routes ####
 @app.route("/")
