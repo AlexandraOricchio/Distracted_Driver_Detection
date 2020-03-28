@@ -15,19 +15,18 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 #### loading a keras model with flask ####
 def loaded_model():
     global model
-    model = load_model("Data/48_model.h5")
-    model.summary()
+    model = load_model("Data/final_model.h5")
+ 
 
 #### preprocess data function ####
 def prepare_image(img):
     #convert image tp numpy array
     img = image.img_to_array(img)
-    #scale the image pixels and invert the pixels
-    img /= 255 
-    img = 1 - img
-    img = img.reshape(1,480,640,3)
-    print(img.shape)
-    return img
+    #scale the image 
+    img_data = np.expand_dims(img, 0)
+    datagen = image.ImageDataGenerator(rescale=1./255)
+    final_data = datagen.flow(img_data)[0]
+    return final_data
 
 #### flask routes ####
 @app.route("/")
@@ -70,6 +69,10 @@ def predict():
 
             return jsonify(data)
     return render_template("photo.html")
+
+@app.route("/output")
+def output():
+    return render_template("output.html")
 
 if __name__ == '__main__':
     loaded_model()
