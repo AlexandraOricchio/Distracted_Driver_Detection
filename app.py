@@ -9,20 +9,20 @@ from keras import backend as K
 from tensorflow.keras.models import load_model
 
 #### Converting Number Codes to Distraction Type ####
-def distractiontype(i):
-    switcher={
-        0:'safe driving',
-        1:'texting right',
-        2:'talking on the phone right',
-        3:'texting left',
-        4:'talking on the phone left',
-        5:'operating the radio',
-        6:'drinking',
-        7:'reaching behind',
-        8:'hair and makeup',
-        9:'talking to passenger'
-    }
-    return switcher.get(i,"Invalid day of week")
+# def distractiontype(i):
+#     switcher={
+#         0:'safe driving',
+#         1:'texting right',
+#         2:'talking on the phone right',
+#         3:'texting left',
+#         4:'talking on the phone left',
+#         5:'operating the radio',
+#         6:'drinking',
+#         7:'reaching behind',
+#         8:'hair and makeup',
+#         9:'talking to passenger'
+#     }
+#     return switcher.get(i,"Invalid Distraction Method")
 
 #### flask setup ####
 app = Flask(__name__)
@@ -115,7 +115,7 @@ def model():
 @app.route("/photo", methods=["GET","POST"])
 def predict():
     data = {"Success": False}
-
+    filepath = 0
     if request.method == "POST":
         if request.files.get("file"):
             # save file to uploads folder
@@ -137,7 +137,7 @@ def predict():
             data["Success"]=True
 
             # return jsonify(data)
-    return render_template("photo.html",data=data)
+    return render_template("photo.html",data=data,photopath=filepath)
 
 @app.route("/output")
 def output():
