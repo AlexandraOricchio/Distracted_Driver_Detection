@@ -77,36 +77,36 @@ def data():
 
 @app.route("/video", methods=["GET","POST"])
 def video():
-	data = {"Success": False}
+    data = {"Success": False}
 
-	if request.method == "POST":
-		if request.files.get("file"):
+    if request.method == "POST":
+        if request.files.get("file"):
             # save file to uploads folder
-			file = request.files["file"]
-			filename = file.filename
-			filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-			file.save(filepath)
+            file = request.files["file"]
+            filename = file.filename
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath)
 
-			getframes(filepath)
+            getframes(filepath)
 
-			images = []
-			for filename in os.listdir('uploads/video_frames'):
-			    filepath = os.path.join('uploads','video_frames',filename)
-				im = image.load_img(filepath,target_size=(480,640))
-				img = image.img_to_array(im)
-				images.append(img)
+            images = []
+            for filename in os.listdir('uploads/video_frames'):
+                filepath = os.path.join('uploads','video_frames',filename)
+            im = image.load_img(filepath,target_size=(480,640))
+            img = image.img_to_array(im)
+            images.append(img)
 
-			images = np.asarray(images)
-			datagen = image.ImageDataGenerator(rescale=1./255)
-			video_data = datagen.flow(images,
-				target_size=(480,640))
+            images = np.asarray(images)
+            datagen = image.ImageDataGenerator(rescale=1./255)
+            video_data = datagen.flow(images,
+                target_size=(480,640))
 
-			predicted_distraction = model.predict_classes(video_data, batch_size=None)
-			data["Prediction"]=str(predicted_distraction)
-			data["Success"]=True
+            predicted_distraction = model.predict_classes(video_data, batch_size=None)
+            data["Prediction"]=str(predicted_distraction)
+            data["Success"]=True
 
-			return jsonify(data)
-	return render_template("video.html")
+        return jsonify(data)
+    return render_template("video.html",data=data)
 
 @app.route("/model")
 def model():
