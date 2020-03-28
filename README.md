@@ -12,7 +12,7 @@
   - **_48_model.h5:_** Model version 1
   - **_DDD_model.h5:_** Model version 2
   
-- **NNTSA Crash Data Folder:** 
+- **NHTSA Crash Data Folder:** 
   - Raw data from the [National Highway Traffic Saftey Administration](https://www.nhtsa.gov/node/97996/221) for 2016 - 2018
   - **_analysis.ipynb:_** Cleaning, transforming, and analyzing crash data
   
