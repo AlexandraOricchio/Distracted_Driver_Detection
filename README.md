@@ -11,6 +11,7 @@
   - **_test.py:_** Python script outputing whether model is using CPU or GPU
   - **_48_model.h5:_** Model version 1
   - **_DDD_model.h5:_** Model version 2
+  - **_final_model.h5_** Final Model
   
 - **NHTSA Crash Data Folder:** 
   - Raw data from the [National Highway Traffic Saftey Administration](https://www.nhtsa.gov/node/97996/221) for 2016 - 2018

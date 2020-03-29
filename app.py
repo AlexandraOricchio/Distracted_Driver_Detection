@@ -8,6 +8,13 @@ from keras.preprocessing import image
 from keras import backend as K
 from tensorflow.keras.models import load_model
 
+from tensorflow.compat.v1 import ConfigProto
+from tensorflow.compat.v1 import InteractiveSession
+
+config = ConfigProto()
+config.gpu_options.allow_growth = True
+session = InteractiveSession(config=config)
+
 #### Converting Number Codes to Distraction Type ####
 # def distractiontype(i):
 #     switcher={
@@ -105,7 +112,7 @@ def video():
             data["Prediction"]=str(predicted_distraction)
             data["Success"]=True
 
-        return jsonify(data)
+        #return jsonify(data)
     return render_template("video.html",data=data)
 
 @app.route("/model")
@@ -133,8 +140,10 @@ def predict():
             image_array = prepare_image(im)
 
             predicted_distraction = model.predict_classes(image_array)
+            predicted_values = model.predict(image_array)
             data["Prediction"]=str(predicted_distraction)
             data["Success"]=True
+            data["Values"]=predicted_values.tolist()
 
             # return jsonify(data)
     return render_template("photo.html",data=data,photopath=filepath)
