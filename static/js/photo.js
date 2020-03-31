@@ -47,7 +47,17 @@ if (data['Success']) {
   var graph_data = [{
     type: 'scatterpolar',
     r: graph_array,
-    theta: ['0','1','2','3','4','5','6','7','8','9','0'],
+    theta: ['This Driver is being Safe!',
+    'The Driver is texting with their Right Hand',
+    'The Driver is talking on the phone with their Right Hand',
+    'The Driver is texting with their Left Hand',
+    'The Driver is talking on the phone with their Left Hand',
+    'The Driver is Operating the Radio',
+    'The Driver is Drinking',
+    'The Driver is Reaching Behind',
+    'The Driver is Focused on their Hair and Makeup',
+    'The Driver is Talking to a Passenger',
+    'This Driver is being Safe!'],
     fill: 'toself'
   }]
   var layout = {
