@@ -154,6 +154,40 @@ body {
 
 
 
+/* IMAGE NAV START */
+.team-header {
+  /* Positioning */
+  margin-bottom: 33px;
+  font-family: Georgia, Times, "Times New Roman", serif;
+  /* Typography */
+  font-size: 28px;
+  font-weight: bold;
+  color: #9b3a37;
+}
+
+.imageNav-photo {
+  width: 180px;
+  /* Box-model */
+  height: 180px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.imageNav-photo:hover {
+  /* Visuals */
+  opacity: 0.6;
+}
+
+.fig-caption {
+  text-align: center;
+  color: slategray;
+}
+/* IMAGE NAV END */
+
+
+
+
 /* ----FOOTER START---- */
 .footer {
   /* Positioning */
