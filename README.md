@@ -6,7 +6,7 @@
   - **cleanData Folder:** Cleaned data split into training and testing sets
   - **rawData Folder:** Raw data from [StateFarm](https://www.kaggle.com/c/state-farm-distracted-driver-detection/data)
   - **_model_preprocessing.ipynb:_** Jupyter notebook with model preprocessing 
-  - **_model_test.ipynb_**
+  - **_model_test.ipynb_** Jupyter notebook testing final model
   - **_model_preprocessing.py:_** Python script for model preprocessing 
   - **_evaluating.py:_** Python script evaluating _48_model's_ generators
   - **_test.py:_** Python script outputing whether model is using CPU or GPU
@@ -28,6 +28,6 @@
 
 - **Templates Folder:** HTML pages
 
-- **tensorkeras Folder:**
+- **tensorkeras Folder:** Conda environment for Heroku
 
 - **_app.py file:_** Flask application
