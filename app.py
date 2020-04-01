@@ -36,9 +36,9 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
 #### loading a keras model with flask ####
-def loaded_model():
-    global model
-    model = load_model("Data/final_model.h5")
+# def loaded_model():
+#     global model
+#     model = load_model("data/final_model.h5")
  
 
 #### preprocess data function ####
@@ -85,6 +85,7 @@ def data():
 @app.route("/video", methods=["GET","POST"])
 def video():
     data = {"Success": False}
+    model = load_model("data/final_model.h5")
 
     if request.method == "POST":
         if request.files.get("file"):
@@ -116,11 +117,16 @@ def video():
     return render_template("video.html",data=data)
 
 @app.route("/model")
-def model():
+def model1():
     return render_template("model.html")
 
 @app.route("/photo", methods=["GET","POST"])
 def predict():
+    # def loaded_model():
+    # global model
+    
+    model = load_model("data/final_model.h5")
+
     data = {"Success": False}
 
     if request.method == "POST":
@@ -131,7 +137,8 @@ def predict():
                        
             #### make sure image is in correct format and give unique file name
             # if filename.endswith('.jpg'):
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            # filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            filepath = f"{app.config['UPLOAD_FOLDER']}/{filename}"
             file.save(filepath)
 
             # load image in with correct sizing 
@@ -155,5 +162,5 @@ def output():
     return render_template("output.html")
 
 if __name__ == '__main__':
-    loaded_model()
+    # loaded_model()
     app.run(debug=True)
