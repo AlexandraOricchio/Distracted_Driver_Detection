@@ -8,6 +8,8 @@ from keras.preprocessing import image
 from keras import backend as K
 from tensorflow.keras.models import load_model
 
+import cv2
+
 from tensorflow.compat.v1 import ConfigProto
 from tensorflow.compat.v1 import InteractiveSession
 
@@ -57,7 +59,7 @@ def getframes(path):
 	success=1
 	images = []
 
-	folder = os.path.join('uploads','video_frames')
+	folder = os.path.join(app.config['UPLOAD_FOLDER'],'video_frames')
 	for filename in os.listdir(folder):
 		file_path = os.path.join(folder, filename)
 		try:
@@ -70,7 +72,7 @@ def getframes(path):
 
 	while success:
 		success,image = vidObj.read()
-		cv2.imwrite(os.path.join('uploads','video_frames',"frame%d.jpg" % count),image)
+		cv2.imwrite(os.path.join('static','uploads','video_frames',"frame%d.jpg" % count),image)
 		count += 1
 
 #### flask routes ####
@@ -98,19 +100,21 @@ def video():
             getframes(filepath)
 
             images = []
-            for filename in os.listdir('uploads/video_frames'):
-                filepath = os.path.join('uploads','video_frames',filename)
-            im = image.load_img(filepath,target_size=(480,640))
-            img = image.img_to_array(im)
-            images.append(img)
+            for filename in os.listdir('static/uploads/video_frames'):
+                filepath = os.path.join(app.config['UPLOAD_FOLDER'],'video_frames',filename)
+                try:
+                    im = image.load_img(filepath,target_size=(480,640))
+                except Exception as e:
+                    print('Failed to load %s. Reason: %s' % (filename, e))
+                img = image.img_to_array(im)
+                images.append(img)
 
             images = np.asarray(images)
             datagen = image.ImageDataGenerator(rescale=1./255)
-            video_data = datagen.flow(images,
-                target_size=(480,640))
+            video_data = datagen.flow(images)
 
             predicted_distraction = model.predict_classes(video_data, batch_size=None)
-            data["Prediction"]=str(predicted_distraction)
+            data["Prediction"]=predicted_distraction.tolist()
             data["Success"]=True
 
         #return jsonify(data)

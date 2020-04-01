@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="../static/css/styles.css" media="screen">
   </head>
 
+  <script type="text/javascript">
+    data = ({{data|tojson}})
+  </script>
 
   <body>
     <!-- Start of navbar -->
@@ -59,6 +62,7 @@
               <input type="file" name="file">
               <input type="submit" value="Upload">
             </form>
+            <div id="graph"></div>
           </article>
         </div>
       </section>
@@ -79,6 +83,13 @@
 
     <!-- Bootstrap CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- D3 and Plotly-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/video.js') }}"></script>
   </body>
 
 </html>
