@@ -216,3 +216,9 @@ body {
   background-color: #9b3a37;
 }
 /* ----FOOTER END---- */
+
+.upload_img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
