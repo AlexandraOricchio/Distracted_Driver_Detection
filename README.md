@@ -16,16 +16,18 @@
   
 - **NHTSA Crash Data Folder:** 
   - Raw data from the [National Highway Traffic Saftey Administration](https://www.nhtsa.gov/node/97996/221) for 2016 - 2018
-  - **_Results folder:_** Resulting CSV files from data cleaning and transformation
+  - **_Results folder:_** Resulting cleaned and transformed data in CSV files 
   - **_Untitled.ipynb:_** Cleaning, transforming, and analyzing crash data
   - **_data_transformation.ipynb:_** Additional cleaning and transforming of data
   
-- **Static Folder:** CSS styling, HTML images 
+- **Static Folder:** 
+  - CSS styling
+  - HTML images
+  - JavaScript files
+  - **Uploads Folder:** Storage folder for images submited by users
 
 - **Templates Folder:** HTML pages
 
 - **tensorkeras Folder:**
-
-- **Uploads Folder:** Storage folder for images submited by users
 
 - **_app.py file:_** Flask application
