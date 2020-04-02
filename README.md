@@ -32,4 +32,4 @@
 
 - **_app.py file:_** Flask application
 
-- **_DDD_presentation:_** PowerPoint Presentation Slides
+- **_DDD_presentation.pptx:_** PowerPoint Presentation Slides
