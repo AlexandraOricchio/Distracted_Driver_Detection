@@ -68,8 +68,9 @@
                 <input type="file" name="file">
                 <input type="submit" value="Upload">
                 <p></p>
-                <img class="upload_img" src="/static/uploads/{{ filename }}" onerror="this.style.display='none'" />
-                <div id='driverImage'></div>
+                <div class="text-center">
+                  <img src="/static/uploads/{{ filename }}" class="rounded mx-auto d-block" onerror="this.style.display='none'" />
+                </div>
                 <p id='safe'> </p>
                 <p id='prediction' align="center"> </p>
               </form>
