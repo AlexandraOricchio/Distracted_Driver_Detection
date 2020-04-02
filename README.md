@@ -31,3 +31,5 @@
 - **tensorkeras Folder:** Conda environment for Heroku
 
 - **_app.py file:_** Flask application
+
+- **_DDD_presentation.pptx:_** PowerPoint Presentation Slides

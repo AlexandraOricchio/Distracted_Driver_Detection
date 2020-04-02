@@ -41,39 +41,42 @@ app.config['UPLOAD_FOLDER'] = 'static/uploads'
 # def loaded_model():
 #     global model
 #     model = load_model("data/final_model.h5")
- 
+
 
 #### preprocess data function ####
 def prepare_image(img):
     #convert image tp numpy array
     img = image.img_to_array(img)
-    #scale the image 
+    #scale the image
     img_data = np.expand_dims(img, 0)
     datagen = image.ImageDataGenerator(rescale=1./255)
     final_data = datagen.flow(img_data)[0]
     return final_data
 
 def getframes(path):
-	vidObj = cv2.VideoCapture(path)
-	count = 0
-	success=1
-	images = []
+    vidObj = cv2.VideoCapture(path)
+    count = 0
+    success=1
+    images = []
 
-	folder = os.path.join(app.config['UPLOAD_FOLDER'],'video_frames')
-	for filename in os.listdir(folder):
-		file_path = os.path.join(folder, filename)
-		try:
-			if os.path.isfile(file_path) or os.path.islink(file_path):
-				os.unlink(file_path)
-			elif os.path.isdir(file_path):
-				shutil.rmtree(file_path)
-		except Exception as e:
-			print('Failed to delete %s. Reason: %s' % (filepath, e))
+    folder = os.path.join(app.config['UPLOAD_FOLDER'],'video_frames')
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (filepath, e))
 
-	while success:
-		success,image = vidObj.read()
-		cv2.imwrite(os.path.join('static','uploads','video_frames',"frame%d.jpg" % count),image)
-		count += 1
+    while success:
+        success,image = vidObj.read()
+        try:
+            cv2.imwrite(os.path.join('static','uploads','video_frames',"frame%d.jpg" % count),image)
+        except Exception as e:
+            print('Failed to load %s. Reason: %s' % (filename, e))
+        count += 1
 
 #### flask routes ####
 @app.route("/")
@@ -132,7 +135,7 @@ def gallery():
 def predict():
     # def loaded_model():
     # global model
-    
+
     model = load_model("data/final_model.h5")
 
     data = {"Success": False}
@@ -142,14 +145,14 @@ def predict():
             # save file to uploads folder
             file = request.files["file"]
             filename = file.filename
-                       
+
             #### make sure image is in correct format and give unique file name
             # if filename.endswith('.jpg'):
             # filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             filepath = f"{app.config['UPLOAD_FOLDER']}/{filename}"
             file.save(filepath)
 
-            # load image in with correct sizing 
+            # load image in with correct sizing
             image_size = (480,640)
             im = image.load_img(filepath,target_size=image_size)
             # convert image to an array of values
