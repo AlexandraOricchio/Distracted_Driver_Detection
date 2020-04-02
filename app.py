@@ -127,6 +127,10 @@ def video():
 def model1():
     return render_template("model.html")
 
+@app.route("/gallery")
+def gallery():
+    return render_template("gallery.html")
+
 @app.route("/photo", methods=["GET","POST"])
 def predict():
     # def loaded_model():
